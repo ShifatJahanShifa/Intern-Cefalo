@@ -87,4 +87,6 @@ Proxies may perform numerous functions:
 - Just to know, the **Fetch API** is a replacement for **XMLHttpRequest**.
 
 #### Concepts and Usage:
+The fetch API uses
 - **Server-sent events**: It is a one-way service that allows a server to send events to the client, using HTTP as a transport mechanism. The client opens a connection using the **EventSource** interface and establishes event handlers. The browser converts the message into event objects and delivers it to the event handlers. If there is no type-specific event handler, then the browser passes it to the `onmessage` event handler.
+
