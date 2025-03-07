@@ -186,3 +186,226 @@ It is a character-based protocol.
 2. in the cmd, telnet 127.0.0.1 3000 (built TCP connection with the server)
 3. 
 
+
+
+`HEAD`   
+It is used to retrieve the metadata of the resource. The response of a **HEAD** request is only the headers. It does not include body part. We can use it when we need to know metadata about a resurce. Such as there is a large file. Before proceeding to download it using **GET** request, we can check the length of the resource by using **HEAD** request. The header `Content-Length` contains the size of the data. 
+
+Example: 
+
+The curl request: 
+```
+C:\Users\Shifa>curl --head example.com
+```
+
+The response: 
+```HTTP
+HTTP/1.1 200 OK
+Content-Type: text/html
+ETag: "84238dfc8092e5d9c0dac8ef93371a07:1736799080.121134"
+Last-Modified: Mon, 13 Jan 2025 20:11:20 GMT
+Cache-Control: max-age=425
+Date: Fri, 07 Mar 2025 01:34:14 GMT
+Connection: keep-alive
+```
+
+
+`POST` 
+The main difference between **PUT** and **POST** is **PUT** is idempotent. Sucessive identical PUT request does not have side effects. But sucessive identical POST request has side effects. 
+
+We need to format/encode the content in the body. For HTML forms, we can specify the encoding using `enctype` attribute in the form element. Or using `formenctype` attribute in the form element like input or button. 
+
+There are three types of encoding.     
+
+1. application/x-www-form-urlencoded:    
+key-value pair separated by &. non-alphanumeric characters are percent-encoded. It is the default encoding type. It is not suitable for form with file uploads as it is not suitable for binary data. 
+Example:  
+
+
+    First Name: John
+    Last Name: Doe
+    Email: john.doe@example.com 
+
+    After encoding: first-name=John&last-name=Doe&email=john.doe%40example.com
+
+    More example: 
+
+    ```HTTP
+    POST /test HTTP/1.1
+    Host: example.com
+    Content-Type: application/x-www-form-urlencoded
+    Content-Length: 27
+
+    field1=value1&field2=value2
+    ```
+
+2. multipart/form-data:   
+Each part of the data are separated by delimiter which is defined by user-agent. For example: a boundary string like boundary="shifa12345"  [using my name 😁]
+
+    ```HTTP
+    POST /test HTTP/1.1
+    Host: example.com
+    Content-Type: multipart/form-data;boundary="delimiter12345"
+
+    --delimiter12345
+    Content-Disposition: form-data; name="field1"
+
+    value1
+    --delimiter12345
+    Content-Disposition: form-data; name="field2"; filename="example.txt"
+
+    value2
+    --delimiter12345-
+    ```
+
+3. text/plain:   
+The text/plain MIME type is used when sending simple text data without any special encoding or formatting. 
+
+`PUT`   
+Example: 
+
+```HTTP
+PUT /new.html HTTP/1.1
+Host: example.com
+Content-type: text/html
+Content-length: 16
+
+<p>New File</p> 
+``` 
+
+If the target resource does not have a current representation and the PUT request successfully creates one, then the origin server must send a 201 Created response.   
+```HTTP
+HTTP/1.1 201 Created
+Content-Location: /new.html
+```  
+
+If the target resource exists, then the server sends `200 ok` or `204 no content`.   
+```HTTP
+HTTP/1.1 204 No Content
+Content-Location: /new.html
+``` 
+
+`DELETE`  
+Request: 
+```HTTP
+    DELETE /file.html HTTP/1.1
+    Host: example.com
+```
+
+Response: 
+
+```HTTP 
+    HTTP/1.1 204 No Content
+    Date: Wed, 04 Sep 2024 10:16:04 GMT
+```
+
+or 
+
+```HTTP
+HTTP/1.1 200 OK
+Content-Type: text/html; charset=UTF-8
+Date: Fri, 21 Jun 2024 14:18:33 GMT
+Content-Length: 1234
+
+<html>
+  <body>
+    <h1>File "file.html" deleted.</h1>
+  </body>
+</html>
+``` 
+
+or 
+
+```HTTP
+HTTP/1.1 202 Accepted
+Date: Wed, 26 Jun 2024 12:00:00 GMT
+Content-Type: text/html; charset=UTF-8
+Content-Length: 1234
+
+<html>
+  <body>
+    <h1>Deletion of "file.html" accepted.</h1>
+    <p>See <a href="http://example.com/tasks/123/status">the status monitor</a> for details.</p>
+  </body>
+</html>
+``` 
+
+It means that the request has been accepted by the server but the resource has not yet been deleted. 
+
+So, supported status code: `200`, `202`, `204`
+
+`PATCH`  
+It is not always idempotent. Given below the example: 
+
+suppose, there is a bank account resource that tracks the user's account balance. 
+```JSON
+{
+    "accountID": "12345",
+    "balance": 500
+}
+```  
+
+Now in the case of **PATCH** request:  
+
+```HTTP
+PATCH /accounts/12345 HTTP/1.1 
+Content-Type: application/json 
+
+{
+    "balance": "increment",
+    "amount": 100
+}
+``` 
+
+After appyling the request first time, the result is: 
+```JSON
+{
+    "accountID": "12345",
+    "balance": 600
+}
+``` 
+
+After appyling the request second time, the result is: 
+```JSON
+{
+    "accountID": "12345",
+    "balance": 700
+}
+``` 
+
+So, we can see that for the two consecutive identical requests, the effect on server intended by user is not same. At first, the output balance is 600. After that the output balance is 700.   
+That's why the **PATCH** request is not always idempotent.  
+
+For CORS, we can specify that the server wll support the **PATCH** request by specifying it in the `Allow` or `Access-Control-Allow-Method` response header. 
+
+Example: 
+```JSON
+{
+  "firstName": "Example",
+  "LastName": "User",
+  "userId": 123,
+  "signupDate": "2024-09-09T21:48:58Z",
+  "status": "active",
+  "registeredDevice": {
+    "id": 1,
+    "name": "personal",
+    "manufacturer": {
+      "name": "Hardware corp"
+    }
+  }
+}
+``` 
+If we want to update the **status** field, then we can only send data to update that. We don't need to overwrite the whole json data. 
+
+```JSON 
+PATCH /users/123 HTTP/1.1
+Host: example.com
+Content-Type: application/json
+Content-Length: 27
+Authorization: Bearer ABC123
+
+{
+  "status": "suspended"
+}
+``` 
+
