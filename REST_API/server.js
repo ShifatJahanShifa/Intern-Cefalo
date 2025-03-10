@@ -1,6 +1,11 @@
 const express = require('express');
 const app = express();
 const port = 4000; 
+const cors=require('cors');
+app.use(cors({ 
+    origin: 'https://www.husseinnasser.com' 
+    // origin: '*'
+}));
 
 app.use(express.json());
 
@@ -76,6 +81,12 @@ app.put('/drinks/:name',(req,res)=>{
     
     res.json({message: 'Drink updated'});
 })
+
+
+app.get('*',(req,res)=>{
+    res.json({message: "Welcome to our site"})
+})
+
 
 app.listen(port, '127.0.0.1', () => {
   console.log(`Server is running on ${port}`);
