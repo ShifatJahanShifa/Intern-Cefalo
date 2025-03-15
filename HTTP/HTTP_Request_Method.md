@@ -7,7 +7,7 @@ Those methods are safe if they dont alter the state of the server. such as `GET`
 
 Those methods are unsafe if they alter the state of the server. such as `POST`, `PUT`, `PATCH` etc. 
 ## Idempotent
-Those methods are idempotent if we get the same response everytime we make request with that methods. such as `GET`, `HEAD`.
+Those methods are idempotent if we get the same response everytime we make request with that methods. such as `GET`, `HEAD`. Idempotency provides us **fault-tolerant API**.
 
 > Fact 
 
@@ -408,4 +408,12 @@ Authorization: Bearer ABC123
   "status": "suspended"
 }
 ``` 
+
+> Note: It must be handled `Atomically`
+
+
+`OPTIONS` 
+We use this method to know which methods are allowed for a resouce. In the response, we can see the `Allow` header which tells us the allowed methods associated with the resource. If we can access the resource in both modes - authenticated and unauthenticated, the number of allowed methods may vary. 
+
+> The  **OPTIONS** method **CAN** have response body. 
 

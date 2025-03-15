@@ -26,7 +26,7 @@ function authenticate(req,res,next){
 }
 
 app.get('/test',authenticate, (req, res) => {
-  res.jstatus(200).json({ message: 'Hello, world!' });
+  res.status(200).json({ message: 'Hello, world!' });
 })
 
 // Start the server

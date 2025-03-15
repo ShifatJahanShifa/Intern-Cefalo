@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const port = 4000; 
 const cors=require('cors');
-app.use(cors({ 
-    origin: 'https://www.husseinnasser.com' 
-    // origin: '*'
-}));
+// app.use(cors({ 
+//     origin: 'https://www.husseinnasser.com' 
+//     // origin: '*'
+// }));
 
 app.use(express.json());
 

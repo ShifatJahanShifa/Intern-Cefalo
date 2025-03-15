@@ -26,3 +26,15 @@ Headers can be grouped according to how proxies handle them.
 `WWW-Authenticate`   
 
 This is a response header. 
+
+## Content-Type
+For the custom `Content-Type`, follow the structure instead of `text/xml` because the client is not capaable to handle this type of information. 
+```HTTP
+Content-type: application/vnd+company.category+xml
+Content-type: application/vnd+company.category+html
+Content-type: application/vnd+company.category+json
+``` 
+
+> Note: application/vnd is a vendor specific content-type. It is not standardized. 
+
+> Note: for pagination, use link relation instead of URL specification. If you use URL specification, don't assume anything. 
