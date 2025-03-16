@@ -1,17 +1,17 @@
 # Status Code
 
 ### 2XX
-`200`- **OK**
-`201`- **Created**
+`200`- **OK**  
+`201`- **Created**   
 `202`- **Accepted**
 
 ### 3XX
 `303`- **See Other**
 
 ### 4XX
-`404`- **Not Found**
+`404`- **Not Found**   
 `405`- **Method Not Allowed**   
-`406`- **Not Acceptable**
+`406`- **Not Acceptable**  
 `410`- **Gone**
 
 ### 5XX
