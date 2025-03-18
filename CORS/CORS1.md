@@ -28,6 +28,15 @@
 - This was annoying to check everytime that the origin and the ACAO value in the response are same. 
 - This was kinda sad that if we have a static public site, then how we will allow it? 
 - Some said that can't we use `*` to allow everyone to read response? 
-- But the concern of the designers of the CORS is that `*` was already a thing on the `Flash`, cross domain request with flash. 
-- This gave the birth of CORS: ACAO *
-  
+- But the concern of the designers of the CORS is that `*` was already a thing on the `Flash`, cross domain request with flash. Everyone with that setting had security vulnerability issue. 
+- The solution is that CORS: ACAO * with no `Access-Control-Allow-Credentials`. That means that `ACAO: *` will only work if no cookie or credential is sent along with the request as it is a public site. (xhr.withCredentials=False). Using `*` and `withCredential` are network error.   
+- `ACAO *` is the most secure setting or one of the safest HTTP headers.
+- What if we want to make a more complex request? we can't. the site might not want us to.
+- Why don't we let the site decide? But will the site be ready even for the request that ask? 
+- The solution is `Preflight Requests`.
+- We perform the preflight request for the methods which are not simple.  
+- we first request with `OPTIONS` method. We put what the js is trying to do. Like we request with `Access-Control-Allow-Request-Headers` or `Access-Control-Request-Method`.
+- But the complex request was a disaster. Because 
+  - it adds a complicated roundtrip before each request.
+  - The preflight request was capped at 10 min originally. The cache is tied to the URI.
+  - a change in URI ( even query params) will mean a new preflight
