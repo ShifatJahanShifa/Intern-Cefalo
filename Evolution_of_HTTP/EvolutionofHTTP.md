@@ -51,7 +51,7 @@ A page with an image
 ```  
 
 ## HTTP/1.1 - The standardized protocol
-The improvements in HTTP/1.0 involved:   
+The improvements in HTTP/1.1 involved:   
 1. Kepp-alive, reused connection
 2. pipelining was added
 3. chunked responses were also supported
