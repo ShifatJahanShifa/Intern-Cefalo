@@ -100,7 +100,26 @@ research findings or are not covered by research.
 <details>
     <summary>The key characteristics: </summary>
     <li> A practical-knowledge gap is not a common gap compared to its counterparts. However, it is recognized by researchers and does exist in prior research.
-    <li> An evidence gap occurs when a provocative exception arises, when new research finding contradicts widely accepted conclusions.
+    <li> This kind of gap tends to be a discrepancy between practices and research findings that can motivate new research in this direction.
     <li>  A practical-knowledge (action-knowledge) conflict arises when the actual behavior of professionals is different from their advocated behavior. 
     <li> In this case, research could seek to determine the scope of the conflict and to uncover the reasons for its existence.
 </details>
+
+
+<br>
+Here is a summary of the above discussion: 
+### Table: The Seven Types of Research Gaps (From Most to Least Common)
+
+| **Research Gap Type**        | **Also Known As**                         | **Definition**                                                                                                                                     |
+|-----------------------------|-------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------------------------|
+| **Population Gap**          | Under-researched sub-groups gap           | Research about populations that are underrepresented or not adequately represented in the evidence base or prior research (e.g., gender, race/ethnicity, age).                                       |
+| **Empirical Gap**           | Evaluation void gap                       | Research findings or propositions that require evaluation or empirical verification.                                                              |
+| **Methodological Gap**      | Methodology void gap                      | A variation of research methods is necessary to generate new insights or to avoid distorted findings.                                            |
+| **Knowledge Gap**           | Knowledge void gap                        | When the desired research findings do not exist in the current literature.                                                                 |
+| **Theoretical Gap**         | Theory application void gap              | Theory should be applied to certain research issues to generate new insights. If there is a lack of theory, then a gap exists.                                                |
+| **Evidence Gap**            | Contradictory evidence gap                | Studies have valid conclusions individually, but their results contradict when viewed together from a broader (abstract) perspective.             |
+| **Practical-Knowledge Gap** | Action-knowledge conflict gap             | When professional practices differ from or are not supported by research findings.                                                                |
+
+
+Reference: 
+<li> https://fenix.iseg.ulisboa.pt/downloadFile/1407508027549767/Adu_Miles_2004_Capt-5.pdf
